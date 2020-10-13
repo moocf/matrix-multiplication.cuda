@@ -20,11 +20,11 @@ void matrix_product(float* a, float* x, float* y, int XR, int XC, int YC) {
 void test_populate(float *x, float *y, int XR, int XC, int YC) {
   for (int r=0; r<XR; r++) {
     for (int c=0; c<XC; c++)
-      GET2D(x, r, c, XC) = (r*XC + c)*1e-8f;
+      GET2D(x, r, c, XC) = (float) r*XC + c;
   }
   for (int r=0; r<XC; r++) {
     for (int c = 0; c < YC; c++)
-      GET2D(y, r, c, YC) = (r*YC + c)*1e-8f;
+      GET2D(y, r, c, YC) = (float) r*YC + c;
   }
 }
 
