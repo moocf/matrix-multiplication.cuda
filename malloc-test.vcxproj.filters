@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="main.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="support.h" />
+    <ClInclude Include="_malloc.h">
+      <Filter>Test cases</Filter>
+    </ClInclude>
+    <ClInclude Include="_cuda_malloc.h">
+      <Filter>Test cases</Filter>
+    </ClInclude>
+    <ClInclude Include="_cuda_host_alloc.h">
+      <Filter>Test cases</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Test cases">
+      <UniqueIdentifier>{0152293a-6f17-4fbc-9e4c-f366bb68070e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
