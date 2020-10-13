@@ -24,7 +24,8 @@ int main() {
   test_populate(x, y, XR, XC, YC);
 
   printf("CPU matrix multiplication ...\n");
-  test_print(NULL, a, XR, YC, test_host(exp, x, y, XR, XC, YC));
+  test_print(NULL, a, XR, YC, test_host(a, x, y, XR, XC, YC));
+  memcpy(exp, a, A1);
 
   printf("GPU matrix multiplication, simple ...\n");
   test_print(exp, a, XR, YC, test_simple(a, x, y, XR, XC, YC));

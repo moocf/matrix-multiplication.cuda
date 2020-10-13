@@ -30,9 +30,10 @@ void test_populate(float *x, float *y, int XR, int XC, int YC) {
 
 
 void test_print(float *exp, float *ans, int R, int C, float duration) {
-  printf("Execution time: %3.1f ms\n", duration);
+  printf("Execution time: %.1f ms\n", duration);
+  printf("Matrix element sum: %.1f\n", SUM_ARRAY(ans, R*C));
   if (exp) {
-    int cmp = memcmp(exp, ans, R * C * sizeof(float));
+    int cmp = memcmp(exp, ans, R*C * sizeof(float));
     if (cmp != 0) printf("Result is invalid!\n");
   }
   printf("\n");
