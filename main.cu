@@ -8,9 +8,9 @@
 
 
 int main() {
-  int XR = 64;
-  int XC = 64;
-  int YC = 64;
+  int XR = 1024;
+  int XC = 1024;
+  int YC = 1024;
   
   size_t A1 = XR * YC * sizeof(float);
   size_t X1 = XR * XC * sizeof(float);
@@ -21,16 +21,13 @@ int main() {
   float *y = (float*) malloc(Y1);
   
   float *exp = (float*) malloc(A1);
-  test_populate(exp, x, y, XR, XC, YC);
-  //PRINT2D(exp, 4, 4);
+  test_populate(x, y, XR, XC, YC);
 
   printf("CPU matrix multiplication ...\n");
-  test_print(exp, a, XR, YC, test_host(a, x, y, XR, XC, YC));
-  //PRINT2D(a, 4, 4);
+  test_print(NULL, a, XR, YC, test_host(exp, x, y, XR, XC, YC));
 
   printf("GPU matrix multiplication, simple ...\n");
   test_print(exp, a, XR, YC, test_simple(a, x, y, XR, XC, YC));
-  //PRINT2D(a, 4, 4);
 
   //printf("CPU matrix multiplication, tiled ...\n");
   //test_print(exp, a, XR, YC, test_tiled(a, x, y, XR, XC, YC));

@@ -17,7 +17,7 @@ void matrix_product(float* a, float* x, float* y, int XR, int XC, int YC) {
 }
 
 
-void test_populate(float *exp, float *x, float *y, int XR, int XC, int YC) {
+void test_populate(float *x, float *y, int XR, int XC, int YC) {
   for (int r=0; r<XR; r++) {
     for (int c=0; c<XC; c++)
       GET2D(x, r, c, XC) = (float) r*XC +c;
@@ -26,7 +26,6 @@ void test_populate(float *exp, float *x, float *y, int XR, int XC, int YC) {
     for (int c = 0; c < YC; c++)
       GET2D(y, r, c, YC) = (float) r*YC + c;
   }
-  matrix_product(exp, x, y, XR, XC, YC);
 }
 
 
