@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{36D9F6EE-BF9D-4E64-A63A-8E01519244B2}</ProjectGuid>
-    <RootNamespace>malloc_test</RootNamespace>
+    <RootNamespace>matrix_multiplication</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
