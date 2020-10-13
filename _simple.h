@@ -17,15 +17,16 @@ __global__ void kernel_simple(float *a, float *x, float *y, int XR, int XC, int 
 
 
 float test_simple(float *a, float *x, float *y, int XR, int XC, int YC) {
-  int A1 = XR * YC * sizeof(float);
-  int X1 = XR * XC * sizeof(float);
-  int Y1 = XC * YC * sizeof(float);
+  size_t A1 = XR * YC * sizeof(float);
+  size_t X1 = XR * XC * sizeof(float);
+  size_t Y1 = XC * YC * sizeof(float);
 
   cudaEvent_t start, stop;
   TRY( cudaEventCreate(&start) );
   TRY( cudaEventCreate(&stop) );
+  TRY( cudaEventRecord(start, 0) );
 
-  void *aD, *xD, *yD;
+  float *aD, *xD, *yD;
   TRY( cudaMalloc(&aD, A1) );
   TRY( cudaMalloc(&xD, X1) );
   TRY( cudaMalloc(&yD, Y1) );

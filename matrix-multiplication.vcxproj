@@ -84,10 +84,11 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="main.h" />
     <ClInclude Include="support.h" />
-    <ClInclude Include="_cuda_host_alloc.h" />
-    <ClInclude Include="_cuda_malloc.h" />
-    <ClInclude Include="_malloc.h" />
+    <ClInclude Include="_host.h" />
+    <ClInclude Include="_simple.h" />
+    <ClInclude Include="_tiled.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

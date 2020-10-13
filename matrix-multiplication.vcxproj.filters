@@ -5,13 +5,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="support.h" />
-    <ClInclude Include="_malloc.h">
+    <ClInclude Include="main.h" />
+    <ClInclude Include="_simple.h">
       <Filter>Test cases</Filter>
     </ClInclude>
-    <ClInclude Include="_cuda_malloc.h">
+    <ClInclude Include="_tiled.h">
       <Filter>Test cases</Filter>
     </ClInclude>
-    <ClInclude Include="_cuda_host_alloc.h">
+    <ClInclude Include="_host.h">
       <Filter>Test cases</Filter>
     </ClInclude>
   </ItemGroup>

@@ -37,7 +37,7 @@ float test_tiled(float *a, float *x, float *y, int XR, int XC, int YC) {
   TRY( cudaEventCreate(&start) );
   TRY( cudaEventCreate(&stop) );
 
-  void *aD, *xD, *yD;
+  float *aD, *xD, *yD;
   TRY( cudaMalloc(&aD, A1) );
   TRY( cudaMalloc(&xD, X1) );
   TRY( cudaMalloc(&yD, Y1) );

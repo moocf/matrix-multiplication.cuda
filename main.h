@@ -8,7 +8,7 @@
 void matrix_product(float* a, float* x, float* y, int XR, int XC, int YC) {
   for (int r=0; r<XR; r++) {
     for (int c=0; c<YC; c++) {
-      int s = 0;
+      float s = 0;
       for (int i=0; i<XC; i++)
         s += x[r*XC + i] * y[i*YC + c];
       a[r*YC + c] = s;
@@ -20,11 +20,11 @@ void matrix_product(float* a, float* x, float* y, int XR, int XC, int YC) {
 void test_populate(float *exp, float *x, float *y, int XR, int XC, int YC) {
   for (int r=0; r<XR; r++) {
     for (int c=0; c<XC; c++)
-      GET2D(x, r, c, XC) = r*c * 10e-9f;
+      GET2D(x, r, c, XC) = (float) r*XC +c;
   }
   for (int r=0; r<XC; r++) {
-    for (int c=0; c<YC; c++)
-      GET2D(y, r, c, YC) = r*c * 10e-9f;
+    for (int c = 0; c < YC; c++)
+      GET2D(y, r, c, YC) = (float) r*YC + c;
   }
   matrix_product(exp, x, y, XR, XC, YC);
 }

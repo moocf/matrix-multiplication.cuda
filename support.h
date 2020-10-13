@@ -80,11 +80,11 @@ float sum_array(float* x, int N) {
 
 
 #ifndef PRINTVEC
-inline void printvec(float* x, int N) {
+inline void printvec(float *x, int N) {
     printf("{");
-    for (int i = 0; i < N - 1; i++)
+    for (int i=0; i<N-1; i++)
         printf("%.1f, ", x[i]);
-    if (N > 0) printf("%.1f", x[N - 1]);
+    if (N>0) printf("%.1f", x[N-1]);
     printf("}");
 }
 
@@ -144,4 +144,22 @@ typedef unsigned int uint;
 #ifndef UINT8
 typedef unsigned char uint8;
 #define UINT8 uint8
+#endif
+
+
+#ifndef PRINT2D
+inline void print2d(float *x, int R, int C) {
+  printf("{\n");
+  for (int r=0; r<R; r++) {
+    for (int c=0; c<C; c++)
+      printf("%.1f, ", GET2D(x, r, c, C));
+    printf("\n");
+  }
+  printf("}\n");
+}
+
+// Prints a 2d-array.
+// PRINT2D(x, 4, 4)
+#define PRINT2D(x, R, C) \
+  print2d(x, R, C)
 #endif
