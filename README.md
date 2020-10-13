@@ -42,7 +42,7 @@ Execution time: 32.8 ms
 See [main.cu] for code, [main.ipynb] for notebook.
 
 [main.cu]: main.cu
-[main.ipynb]: https://colab.research.google.com/drive/1g0OANPhXuV-iyGwcaLrTMMv0JDQvw6Gd?usp=sharing
+[main.ipynb]: https://colab.research.google.com/drive/14LZMQ_uI2nSLTNpnwaGcQ7O6LzK604qv?usp=sharing
 
 
 ### references
