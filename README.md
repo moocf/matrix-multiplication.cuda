@@ -47,4 +47,4 @@ See [main.cu] for code, [main.ipynb] for notebook.
 
 ### references
 
-- [CUDA by Example :: Jason Sanders, Edward Kandrot](http://www.mat.unimi.it/users/sansotte/cuda/CUDA_by_Example.pdf)
+- [Running a parallel matrix multiplication program using CUDA on FutureGrid :: Indiana University](https://kb.iu.edu/d/bcgu)
