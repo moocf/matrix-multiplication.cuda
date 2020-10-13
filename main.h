@@ -1,6 +1,7 @@
 #pragma once
 #include <string.h>
 #include <stdio.h>
+#include "support.h"
 
 
 // Calculates matrix product on CPU.
@@ -13,6 +14,19 @@ void matrix_product(float* a, float* x, float* y, int XR, int XC, int YC) {
       a[r*YC + c] = s;
     }
   }
+}
+
+
+void test_populate(float *exp, float *x, float *y, int XR, int XC, int YC) {
+  for (int r=0; r<XR; r++) {
+    for (int c=0; c<XC; c++)
+      GET2D(x, r, c, XC) = r*c * 10e-9f;
+  }
+  for (int r=0; r<XC; r++) {
+    for (int c=0; c<YC; c++)
+      GET2D(y, r, c, YC) = r*c * 10e-9f;
+  }
+  matrix_product(exp, x, y, XR, XC, YC);
 }
 
 
