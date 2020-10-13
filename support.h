@@ -29,6 +29,36 @@ inline void try_cuda(cudaError err, const char* exp, const char* func, int line,
 #endif
 
 
+#ifndef DEFINE_CUDA
+// Defines short names for the following variables:
+// - threadIdx.x
+// - threadIdx.y
+// - blockIdx.x
+// - blockIdx.y
+// - blockDim.x
+// - blockDim.y
+#define DEFINE_CUDA(tx, ty, bx, by, BX, BY) \
+  int tx = threadIdx.x; \
+  int ty = threadIdx.y; \
+  int bx = blockIdx.x; \
+  int by = blockIdx.y; \
+  int BX = blockDim.x; \
+  int BY = blockDim.y
+#endif
+
+#ifndef DEFINE
+// Defines short names for the following variables:
+// - threadIdx.x
+// - threadIdx.y
+// - blockIdx.x
+// - blockIdx.y
+// - blockDim.x
+// - blockDim.y
+#define DEFINE(tx, ty, bx, by, BX, BY) \
+  DEFINE_CUDA(tx, ty, bx, by, BX, BY)
+#endif
+
+
 #ifndef __SYNCTHREADS
 void __syncthreads();
 #define __SYNCTHREADS() __syncthreads()
@@ -72,6 +102,12 @@ inline int sum_squares(int x) {
 // Computes sum of squares of natural numbers.
 // SUM_SQUARES(3) = 1^2 + 2^2 + 3^2 = 14
 #define SUM_SQUARES(x) sum_squares(x)
+#endif
+
+
+#ifndef GET2D
+// Gets value at given row, column of 2D array
+#define GET2D(x, r, c, C) (x)[(r)*(C) + (c)]
 #endif
 
 
