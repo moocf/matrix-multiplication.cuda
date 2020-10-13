@@ -4,12 +4,15 @@
 #include "support.h"
 
 
+const int TILEDX = 16;
+const int TILEDY = 16;
+
+
 __global__ void kernel_tiled(float *a, float *x, float *y, int XR, int XC, int YC) {
   DEFINE(tx, ty, bx, by, BX, BY);
-  extern __shared__ float *shared;
-  float *as = &shared[0];
-  float *xs = &shared[1*BY*BX];
-  float *ys = &shared[2*BY*BX];
+  __shared__ float as[TILEDY * TILEDX];
+  __shared__ float xs[TILEDY * TILEDX];
+  __shared__ float ys[TILEDY * TILEDX];
   
   int r = by*BY + ty;
   int c = bx*BX + tx;
@@ -17,8 +20,8 @@ __global__ void kernel_tiled(float *a, float *x, float *y, int XR, int XC, int Y
 
   for (int i=0; i<XC; i+=BX) {
     __syncthreads();
-    GET2D(xs, ty, tx, BX) = GET2D(x, r, c+i, XC);
-    GET2D(ys, ty, tx, BX) = GET2D(y, r+i, c, YC);
+    GET2D(xs, ty, tx, BX) = GET2D(x, r, i+tx, XC);
+    GET2D(ys, ty, tx, BX) = GET2D(y, i+ty, c, YC);
     __syncthreads();
     for (int j=0; j<BX; j++)
       GET2D(as, ty, tx, BX) += GET2D(xs, ty, j, BX) * GET2D(ys, j, tx, BX);
@@ -36,6 +39,7 @@ float test_tiled(float *a, float *x, float *y, int XR, int XC, int YC) {
   cudaEvent_t start, stop;
   TRY( cudaEventCreate(&start) );
   TRY( cudaEventCreate(&stop) );
+  TRY( cudaEventRecord(start, 0) );
 
   float *aD, *xD, *yD;
   TRY( cudaMalloc(&aD, A1) );
@@ -45,10 +49,9 @@ float test_tiled(float *a, float *x, float *y, int XR, int XC, int YC) {
   TRY( cudaMemcpy(xD, x, X1, cudaMemcpyHostToDevice) );
   TRY( cudaMemcpy(yD, y, Y1, cudaMemcpyHostToDevice) );
 
-  dim3 threads(16, 16);
-  dim3 blocks(CEILDIV(XR, 16), CEILDIV(YC, 16));
-  size_t shared = 3 * threads.x * threads.y * sizeof(float);
-  kernel_tiled<<<blocks, threads, shared>>>(aD, xD, yD, XR, XC, YC);
+  dim3 threads(TILEDX, TILEDY);
+  dim3 blocks(CEILDIV(XR, TILEDX), CEILDIV(YC, TILEDY));
+  kernel_tiled<<<blocks, threads>>>(aD, xD, yD, XR, XC, YC);
 
   TRY( cudaMemcpy(a, aD, A1, cudaMemcpyDeviceToHost) );
 

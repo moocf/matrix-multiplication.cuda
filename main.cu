@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "_host.h"
 #include "_simple.h"
-//#include "_tiled.h"
+#include "_tiled.h"
 #include "main.h"
 
 
@@ -29,7 +29,7 @@ int main() {
   printf("GPU matrix multiplication, simple ...\n");
   test_print(exp, a, XR, YC, test_simple(a, x, y, XR, XC, YC));
 
-  //printf("CPU matrix multiplication, tiled ...\n");
-  //test_print(exp, a, XR, YC, test_tiled(a, x, y, XR, XC, YC));
+  printf("CPU matrix multiplication, tiled ...\n");
+  test_print(exp, a, XR, YC, test_tiled(a, x, y, XR, XC, YC));
   return 0;
 }
