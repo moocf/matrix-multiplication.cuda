@@ -1,14 +1,12 @@
 #pragma once
-#include <cuda_runtime.h>
-#include <device_launch_parameters.h>
-#include "support.h"
+#include "_main.hxx"
 
 
-__global__ void kernel_simple(float *a, float *x, float *y, int XR, int XC, int YC) {
+__global__ void kernelSimple(float *a, float *x, float *y, int XR, int XC, int YC) {
   DEFINE(tx, ty, bx, by, BX, BY);
   int r = by*BY + ty;
   int c = bx*BX + tx;
-  
+
   float s = 0;
   for (int i=0; i<XC; i++)
     s += GET2D(x, r, i, XC) * GET2D(y, i, c, YC);
@@ -16,7 +14,7 @@ __global__ void kernel_simple(float *a, float *x, float *y, int XR, int XC, int 
 }
 
 
-float test_simple(float *a, float *x, float *y, int XR, int XC, int YC) {
+float testSimple(float *a, float *x, float *y, int XR, int XC, int YC) {
   size_t A1 = XR * YC * sizeof(float);
   size_t X1 = XR * XC * sizeof(float);
   size_t Y1 = XC * YC * sizeof(float);
@@ -35,8 +33,8 @@ float test_simple(float *a, float *x, float *y, int XR, int XC, int YC) {
   TRY( cudaMemcpy(yD, y, Y1, cudaMemcpyHostToDevice) );
 
   dim3 threads(16, 16);
-  dim3 blocks(CEILDIV(XR, 16), CEILDIV(YC, 16));
-  kernel_simple<<<blocks, threads>>>(aD, xD, yD, XR, XC, YC);
+  dim3 blocks(ceilDiv(XR, 16), ceilDiv(YC, 16));
+  kernelSimple<<<blocks, threads>>>(aD, xD, yD, XR, XC, YC);
 
   TRY( cudaMemcpy(a, aD, A1, cudaMemcpyDeviceToHost) );
 

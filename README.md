@@ -3,7 +3,7 @@ dot-product of respective components is called matrix
 multiplication.
 
 ```c
-test_host():
+testHost():
 Testing matrix multiplication on the CPU.
 A = X . Y
 X: 1024 x 1024
@@ -11,14 +11,14 @@ Y: 1024 x 1024
 ```
 
 ```c
-test_simple():
+testSimple():
 Testing simple matrix multiplication on the GPU.
 This is the standard CPU algorithm adapted to use
 GPU blocks amd threads.
 ```
 
 ```c
-test_tiled():
+testTiled():
 Testing tiled matrix multiplication on the GPU.
 Each thread-block computes the resultant of a small
 square sub-matrix by fetching parts of input matrices

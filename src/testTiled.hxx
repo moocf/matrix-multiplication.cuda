@@ -1,19 +1,16 @@
 #pragma once
-#include <cuda_runtime.h>
-#include <device_launch_parameters.h>
-#include "support.h"
-
+#include "_main.hxx"
 
 const int TILEDX = 16;
 const int TILEDY = 16;
 
 
-__global__ void kernel_tiled(float *a, float *x, float *y, int XR, int XC, int YC) {
+__global__ void kernelTiled(float *a, float *x, float *y, int XR, int XC, int YC) {
   DEFINE(tx, ty, bx, by, BX, BY);
   __shared__ float as[TILEDY * TILEDX];
   __shared__ float xs[TILEDY * TILEDX];
   __shared__ float ys[TILEDY * TILEDX];
-  
+
   int r = by*BY + ty;
   int c = bx*BX + tx;
   GET2D(as, ty, tx, BX) = 0;
@@ -31,7 +28,7 @@ __global__ void kernel_tiled(float *a, float *x, float *y, int XR, int XC, int Y
 }
 
 
-float test_tiled(float *a, float *x, float *y, int XR, int XC, int YC) {
+float testTiled(float *a, float *x, float *y, int XR, int XC, int YC) {
   int A1 = XR * YC * sizeof(float);
   int X1 = XR * XC * sizeof(float);
   int Y1 = XC * YC * sizeof(float);
@@ -50,8 +47,8 @@ float test_tiled(float *a, float *x, float *y, int XR, int XC, int YC) {
   TRY( cudaMemcpy(yD, y, Y1, cudaMemcpyHostToDevice) );
 
   dim3 threads(TILEDX, TILEDY);
-  dim3 blocks(CEILDIV(XR, TILEDX), CEILDIV(YC, TILEDY));
-  kernel_tiled<<<blocks, threads>>>(aD, xD, yD, XR, XC, YC);
+  dim3 blocks(ceilDiv(XR, TILEDX), ceilDiv(YC, TILEDY));
+  kernelTiled<<<blocks, threads>>>(aD, xD, yD, XR, XC, YC);
 
   TRY( cudaMemcpy(a, aD, A1, cudaMemcpyDeviceToHost) );
 
