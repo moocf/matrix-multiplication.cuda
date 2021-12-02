@@ -1,0 +1,13 @@
+CPU matrix multiplication ...
+Execution time: 3880.0 ms
+Matrix element sum: 2.9528e+20
+
+GPU matrix multiplication, simple ...
+Execution time: 7.3 ms
+Matrix element sum: 2.9528e+20
+Result doesnt match exactly!
+
+GPU matrix multiplication, tiled ...
+Execution time: 4.3 ms
+Matrix element sum: 2.9528e+20
+Result doesnt match exactly!

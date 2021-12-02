@@ -28,23 +28,32 @@ matrix multiplication is calculated.
 ```
 
 ```bash
-# OUTPUT
-CPU matrix multiplication ...
-Execution time: 3078.0 ms
+$ nvcc -std=c++17 -Xcompiler -O3 main.cu
+$ ./a.out
 
-GPU matrix multiplication, simple ...
-Execution time: 23.5 ms
-
-CPU matrix multiplication, tiled ...
-Execution time: 32.8 ms
+# CPU matrix multiplication ...
+# Execution time: 3880.0 ms
+# Matrix element sum: 2.9528e+20
+#
+# GPU matrix multiplication, simple ...
+# Execution time: 7.3 ms
+# Matrix element sum: 2.9528e+20
+# Result doesnt match exactly!
+#
+# GPU matrix multiplication, tiled ...
+# Execution time: 4.3 ms
+# Matrix element sum: 2.9528e+20
+# Result doesnt match exactly!
 ```
 
-See [main.cu] for code, [main.ipynb] for notebook.
+See [main.cu] for code.
 
 [main.cu]: main.cu
-[main.ipynb]: https://colab.research.google.com/drive/14LZMQ_uI2nSLTNpnwaGcQ7O6LzK604qv?usp=sharing
+
+<br>
+<br>
 
 
-### references
+## References
 
-- [Running a parallel matrix multiplication program using CUDA on FutureGrid :: Indiana University](https://kb.iu.edu/d/bcgu)
+- [CUDA by Example :: Jason Sanders, Edward Kandrot](https://gist.github.com/wolfram77/72c51e494eaaea1c21a9c4021ad0f320)
