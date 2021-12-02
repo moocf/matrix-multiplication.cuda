@@ -28,6 +28,17 @@ using vector3d = vector<vector<vector<T>>>;
 
 
 
+// GET
+// ---
+
+#ifndef GET2D
+// Gets value at given row, column of 2D array
+#define GET2D(x, r, c, C) (x)[(r)*(C) + (c)]
+#endif
+
+
+
+
 // SIZE
 // ----
 

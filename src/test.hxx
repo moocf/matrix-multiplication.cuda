@@ -37,7 +37,7 @@ void testPrint(float *exp, float *ans, int R, int C, float duration) {
   printf("Matrix element sum: %.5g\n", sum(ans, R*C));
   if (exp) {
     int cmp = memcmp(exp, ans, R*C * sizeof(float));
-    if (cmp != 0) printf("Result doesnt match!\n");
+    if (cmp != 0) printf("Result doesnt match exactly!\n");
   }
   printf("\n");
 }

@@ -6,7 +6,8 @@ const int TILEDY = 16;
 
 
 __global__ void kernelTiled(float *a, float *x, float *y, int XR, int XC, int YC) {
-  DEFINE(tx, ty, bx, by, BX, BY);
+  DEFINE2D(tx, ty, bx, by, BX, BY, GX, GY)
+  UNUSED_CUDA(GX); UNUSED_CUDA(GY);
   __shared__ float as[TILEDY * TILEDX];
   __shared__ float xs[TILEDY * TILEDX];
   __shared__ float ys[TILEDY * TILEDX];

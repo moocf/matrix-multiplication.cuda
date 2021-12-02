@@ -3,7 +3,8 @@
 
 
 __global__ void kernelSimple(float *a, float *x, float *y, int XR, int XC, int YC) {
-  DEFINE(tx, ty, bx, by, BX, BY);
+  DEFINE2D(tx, ty, bx, by, BX, BY, GX, GY)
+  UNUSED_CUDA(GX); UNUSED_CUDA(GY);
   int r = by*BY + ty;
   int c = bx*BX + tx;
 

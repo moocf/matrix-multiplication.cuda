@@ -32,7 +32,7 @@ int main() {
   printf("GPU matrix multiplication, simple ...\n");
   testPrint(exp, a, XR, YC, testSimple(a, x, y, XR, XC, YC));
 
-  printf("CPU matrix multiplication, tiled ...\n");
+  printf("GPU matrix multiplication, tiled ...\n");
   testPrint(exp, a, XR, YC, testTiled(a, x, y, XR, XC, YC));
   return 0;
 }
